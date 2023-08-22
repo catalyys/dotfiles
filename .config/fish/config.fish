@@ -1,9 +1,10 @@
 fish_add_path ~/.local/bin/
-pfetch
 
 export EDITOR="helix"
 
 if status is-interactive
+    pfetch
+
     alias dotfiles="/usr/bin/env git --git-dir=$HOME/git/dotfiles/.git --work-tree=$HOME/git/dotfiles"
     alias da="dotfiles add"
 	alias dc="dotfiles commit -m"
