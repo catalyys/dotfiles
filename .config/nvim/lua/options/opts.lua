@@ -32,9 +32,9 @@ o.clipboard = "unnamedplus" --  use system clipboard
 o.ttyfast = true
 o.cursorline = true
 o.splitbelow = true
-o.autochdir = true
+o.autochdir = false
 o.signcolumn="yes:1"
-o.shell = "/bin/bash"
+o.shell = "/usr/bin/fish"
 
 vim.api.nvim_command("filetype off")
 vim.api.nvim_command("let &runtimepath.=',~/.vim/bundle/neoterm'")

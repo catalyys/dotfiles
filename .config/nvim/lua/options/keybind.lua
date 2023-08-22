@@ -26,15 +26,13 @@ map("n", "<leader>g", "<cmd>Neogit kind=split<CR>", options)
 cmap("n", "<leader>ff", tele.find_files, options)
 map("n", "<leader>fh", "<cmd>Telescope find_files hidden=true<CR>", options)
 cmap("n", "<leader>fg", tele.git_files, options)
-cmap("n", "<leader>fg", tele.git_files, options)
-
 cmap("n", "<leader>fs", function()
 	tele.grep_string({ search = vim.fn.input("Grep > ") });
 end)
 
 
 
--- slef explanitory
+-- self explanitory
 map("n", "<leader>tw", "<cmd>lua MiniTrailspace.trim()<CR>", options)
 map("n", "<leader>fm", "<cmd>CHADopen<CR>", options)
 map("n", "<leader>tt", "<cmd>12 split <CR><cmd>Tnew<CR>", options)
