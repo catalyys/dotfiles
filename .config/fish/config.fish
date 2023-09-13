@@ -1,6 +1,7 @@
 fish_add_path ~/.local/bin/
+fish_add_path ~/.config/emacs/bin/
 
-export EDITOR="helix"
+export EDITOR="nvim"
 
 if status is-interactive
     pfetch
