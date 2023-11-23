@@ -26,6 +26,8 @@ function k --wraps=kubecolor
     kubecolor $argv
 end
 
+alias ip="ip --color"
+
 function sue
     command sudoedit $argv
 end
