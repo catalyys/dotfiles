@@ -1,15 +1,2 @@
-
-
--- ████████╗██████╗ ██╗██╗  ██╗██╗   ██╗
--- ╚══██╔══╝██╔══██╗██║╚██╗██╔╝╚██╗ ██╔╝
---    ██║   ██████╔╝██║ ╚███╔╝  ╚████╔╝
---    ██║   ██╔══██╗██║ ██╔██╗   ╚██╔╝
---    ██║   ██║  ██║██║██╔╝ ██╗   ██║
---    ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝   ╚═╝
-
-
--- Setup Lazy.nvim and plugins
-require("plugins")
-
--- Setup standard neovim options
-require("options")
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
