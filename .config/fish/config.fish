@@ -8,10 +8,10 @@ if status is-interactive
 
     alias dotfiles="/usr/bin/env git --git-dir=$HOME/git/dotfiles/.git --work-tree=$HOME/git/dotfiles"
     alias da="dotfiles add"
-	alias dc="dotfiles commit -m"
-	alias dp="dotfiles push"
+    alias dc="dotfiles commit -m"
+    alias dp="dotfiles push"
 
-	alias hx="helix"
+    alias hx="helix"
     alias t="touch"
 end
 
@@ -24,6 +24,10 @@ end
 
 function k --wraps=kubecolor
     kubecolor $argv
+end
+
+function kns
+    kubectl config set-context --current --namespace=$(k get namespaces | fzf --preview='kubectl get all -n {1}' | awk '{print $1}')
 end
 
 alias ip="ip --color"
