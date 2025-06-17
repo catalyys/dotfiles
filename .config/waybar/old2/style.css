@@ -1,0 +1,111 @@
+* {
+	font-size: 14px;
+	min-height: 0;
+	font-family: "cascadia code";
+	font-weight: Bold;
+	border: 2px;
+}
+
+window#waybar {
+    background: rgba(21, 18, 27, 0);
+	color: #fdf6e3;
+}
+
+#custom-right-arrow-dark,
+#custom-left-arrow-dark {
+	color: #000000;
+	background: #282828;
+
+}
+
+#custom-right-arrow-dark2,
+#custom-left-arrow-dark2 {
+	color: #000000;
+
+}
+
+#custom-right-arrow-dark2,
+#custom-left-arrow-dark2 {
+	color: #000000;
+
+}
+
+#custom-right-arrow-light,
+#custom-left-arrow-light {
+	background: #000000;
+	color: #282828;
+}
+#custom-updates {
+	background: #000000;
+	color: #e7ddd3;
+}
+
+#workspaces button.active {
+    padding: 0 2px;
+    color: #58CD8D;
+    background: #000000;
+}
+
+#workspaces button.urgent {
+    padding: 0 2px;
+    color: #be95ff;
+    background: #000000;
+}
+#workspaces button {
+    padding: 0 2px;
+    color: #fdf6e3;
+    background: #000000;
+}
+
+#clock.1 {
+	color: #e7ddd3;
+	background: #000000;
+}
+#clock.2 {
+	color: #58CD8D;
+	background: #000000;
+}
+#clock.3 {
+	color: #e7ddd3;
+	background: #000000;
+}
+#pulseaudio,
+#memory,
+#cpu,
+#battery,
+#disk,
+#tray {
+	background: #000000;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+#pulseaudio {
+	color: #fdf6e3;
+}
+#memory {
+	color: #fdf6e3;
+}
+#custom-ytube {
+	background: #000000;
+	color: #a62b2b;
+}
+
+#battery {
+	color: #fdf6e3;
+}
+#cpu {
+	color: #fdf6e3;
+}
+#disk {
+	color: #b58900;
+}
+
+#clock,
+#pulseaudio,
+#memory,
+#cpu,
+#battery,
+#disk {
+	padding: 0 10px;
+}
