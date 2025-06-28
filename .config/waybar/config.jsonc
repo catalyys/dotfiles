@@ -114,7 +114,7 @@
         "tooltip": true,
         "interval": 5,
         "min-length": 8,
-        "max-length": 8
+        "max-length": 12
     },
 
     "memory": {
@@ -133,7 +133,7 @@
         "tooltip": false,
         "interval": 5,
         "min-length": 6,
-        "max-length": 6
+        "max-length": 10
     },
 
     "custom/arch": {
@@ -201,7 +201,7 @@
 
     "pulseaudio": {
         "format": "{icon} {volume}%",
-        "format-muted": "婢 {volume}%",
+        "format-muted": "󰝟 {volume}%",
         "format-icons": {
             "headphone": "󰋋",
             "default": ["󰖀", "󰕾"]
@@ -240,7 +240,7 @@
 	  "custom/updates": {
         "format": " 󰏗 {} ",
         "interval": 300,                     // every two hours
-        "exec": "i=$(checkupdates); echo \"$i\" |wc -l; echo \"$i\" |column -t |tr '\n' '\r'",       // # of updates and tooltip details
+        "exec": "i=$(checkupdates-with-aur); echo \"$i\" |wc -l; echo \"$i\" |column -t |tr '\n' '\r'",       // # of updates and tooltip details
         "exec-if": "exit 0",                  // always run; consider advanced run conditions
         "on-click": "kitty -e sudo pacman -Syu", // update system
         "signal": 8
@@ -255,8 +255,8 @@
     "custom/power": {
         "format": " ",
         "tooltip": false,
-        "on-click": "~/.config/waybar/scripts/logoutlaunch.sh 2",
-        "on-click-right": "~/.config/waybar/scripts/logoutlaunch.sh 1",
+        "on-click": "wlogout",
+        //"on-click-right": "~/.config/waybar/scripts/logoutlaunch.sh 1",
         "interval" : 86400
     },
 
