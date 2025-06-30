@@ -1,0 +1,28 @@
+---
+- hosts: localhost
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name: install packages
+      become: true
+      ansible.builtin.package:
+        name: "{{ packages }}"
+        state: latest
+
+    - name: Clone a repo with separate git directory
+      git:
+        repo: https://github.com/catalyys/dotfiles.git
+        dest: "~/.dotfiles"
+        force: true
+        version: "notebook"
+
+    - name: link config with stow
+      shell: stow --adopt .
+      args:
+        chdir: "~/.dotfiles/"
+
+    - name: link config with stow
+      shell: git reset .
+      args:
+        chdir: "~/.dotfiles/"
