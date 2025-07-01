@@ -1,14 +1,14 @@
 #! /usr/bin/bash
 
-mkdir ~/gitcd 
+#mkdir ~/git
 
-cd ~/git
+cd ~
 
 sudo pacman -S git ansible stow --needed --noconfirm
 
-git clone https://github.com/catalyys/dotfiles.git dotfiles
+git clone -b notebook https://github.com/catalyys/dotfiles.git .dotfiles
 
-cd dotfiles/ansible
+cd ~/.dotfiles/ansible
 
 ansible-playbook bootstrap.yml -K
 
