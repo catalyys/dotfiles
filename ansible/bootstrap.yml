@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name: install packages
+      become: true
+      ansible.builtin.package:
+        name: "{{ packages }}"
+        state: latest
