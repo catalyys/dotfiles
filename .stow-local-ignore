@@ -1,3 +1,4 @@
 ansible
 other
 bootstrap.sh
+/.git.*
