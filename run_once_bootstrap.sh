@@ -1,6 +1,6 @@
 #! /usr/bin/bash
 
-sudo pacman -S git ansible stow --needed --noconfirm
+sudo pacman -S git ansible --needed --noconfirm
 
 cd ~/.local/share/chezmoi/ansible
 
