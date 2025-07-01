@@ -18,7 +18,7 @@
         version: "notebook"
 
     - name: link config with stow
-      shell: stow --adopt .
+      shell: stow .
       args:
         chdir: "~/.dotfiles/"
 
