@@ -71,3 +71,4 @@ packages:
   - xdg-desktop-portal-hyprland
   - man-db
   - man-pages
+  - zellij
