@@ -23,14 +23,12 @@ packages:
   - git
   - github-cli
   - grim
-  #- grimblast-git r131.9d4963e-1
+  - go
   - helm
   - hyprland
-  #- hyprland-autoname-workspaces-git
   - hyprpaper
   - k9s
   - kitty
-  #- kubecolor
   - less
   - linux
   - linux-firmware
@@ -66,9 +64,20 @@ packages:
   - wget
   - wireguard-tools
   - wl-clipboard
-  #- wlogout
   - wofi
   - xdg-desktop-portal-hyprland
   - man-db
   - man-pages
   - zellij
+  - uwsm
+  - libnewt
+
+aur_packages:
+  - wlogout
+  - kubecolor
+  - grimblast-git
+  - hyprland-autoname-workspaces-git
+
+service:
+  - gdm
+  - bluetooth

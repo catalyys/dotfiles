@@ -10,7 +10,54 @@
         name: "{{ packages }}"
         state: latest
 
-    - name: enable gdm
+    - name: enable services
       ansible.builtin.systemd_service:
-        name: gdm
+        name: "{{ item }}"
         enabled: true
+      loop: "{{ services }}"
+
+    - name: Check if yay is already installed
+      command: which yay
+      register: yay_installed
+      ignore_errors: yes
+      changed_when: false
+
+    - name: Debug yay installation status
+      debug:
+        msg: "yay is already installed"
+      when: yay_installed.rc == 0
+
+    - block:
+        - name: Create temporary directory for yay installation
+          file:
+            path: "/tmp/yay"
+            state: directory
+            mode: "0755"
+
+        - name: Clone yay repository
+          git:
+            repo: https://aur.archlinux.org/yay.git
+            dest: "/tmp/yay"
+            clone: yes
+            update: no
+
+        - name: Build and install yay
+          command: makepkg -si --noconfirm
+          become: true
+          args:
+            chdir: "/tmp/yay"
+          environment:
+            MAKEFLAGS: "-j$(nproc)"
+
+        - name: Verify yay installation
+          command: yay --version
+          register: yay_version_check
+          changed_when: false
+          failed_when: yay_version_check.rc != 0
+      when: yay_installed.rc != 0
+
+    - name: Install each AUR package individually
+      command: yay -S --noconfirm --needed {{ item }}
+      loop: "{{ aur_packages }}"
+      register: yay_install
+      changed_when: "'there is nothing to do' not in yay_install.stdout"
