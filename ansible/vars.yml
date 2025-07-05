@@ -71,6 +71,7 @@ packages:
   - zellij
   - uwsm
   - libnewt
+  - fprintd
 
 aur_packages:
   - wlogout
