@@ -63,6 +63,10 @@
       register: yay_install
       changed_when: "'there is nothing to do' not in yay_install.stdout"
 
+    - name: debug
+      debug:
+        msg: "/run/user/{{ ansible_effective_user_id }}"
+
     - name: enable hyprland-autoname-workspaces
       ansible.builtin.systemd_service:
         name: hyprland-autoname-workspaces
