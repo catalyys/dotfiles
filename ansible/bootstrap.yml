@@ -70,4 +70,4 @@
         enabled: true
         scope: user
       environment:
-        XDG_RUNTIME_DIR: "/run/user/{{ myuid }}"
+        XDG_RUNTIME_DIR: "/run/user/{{ ansible_effective_user_id }}"
