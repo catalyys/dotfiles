@@ -75,3 +75,20 @@
         scope: user
       environment:
         XDG_RUNTIME_DIR: "/run/user/{{ ansible_effective_user_id }}"
+
+    - name: create nfs dir
+      become: true
+      file:
+        path: "/mnt/nfs"
+        state: directory
+        mode: "0644"
+
+    - name: fstab
+      become: true
+      ansible.posix.mount:
+        src: "10.11.13.22:/mnt/user/{{ item }}"
+        path: "/mnt/nfs/{{ item }}"
+        opts: rw,sync,hard
+        state: mounted
+        fstype: nfs
+      loop: nfs_shares

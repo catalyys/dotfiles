@@ -82,3 +82,8 @@ aur_packages:
 enabled_services:
   - gdm
   - bluetooth
+
+nfs_shares:
+  - olli
+  - media
+  - server
