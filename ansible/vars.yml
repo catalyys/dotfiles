@@ -78,6 +78,6 @@ aur_packages:
   - grimblast-git
   - hyprland-autoname-workspaces-git
 
-service:
+enabled_services:
   - gdm
   - bluetooth

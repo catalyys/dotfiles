@@ -11,10 +11,11 @@
         state: latest
 
     - name: enable services
+      become: true
       ansible.builtin.systemd_service:
         name: "{{ item }}"
         enabled: true
-      loop: "{{ services }}"
+      loop: "{{ enabled_services }}"
 
     - name: Check if yay is already installed
       command: which yay
@@ -61,3 +62,10 @@
       loop: "{{ aur_packages }}"
       register: yay_install
       changed_when: "'there is nothing to do' not in yay_install.stdout"
+
+    - name: enable hyprland-autoname-workspaces
+      ansible.builtin.systemd_service:
+        name: hyprland-autoname-workspaces
+        state: started
+        enabled: true
+        scope: user
