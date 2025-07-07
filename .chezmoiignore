@@ -4,6 +4,8 @@ ansible/**
 other/
 other/**
 
+run_once_bootstrap.sh
+
 {{- if not (.desktop) }}
 run_once_bootstrap.sh
 {{- end }}
