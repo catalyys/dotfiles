@@ -72,6 +72,7 @@ packages:
   - uwsm
   - libnewt
   - fprintd
+  - moonlight-qt
 
 aur_packages:
   - wlogout
