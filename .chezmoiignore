@@ -4,6 +4,6 @@ ansible/**
 other/
 other/**
 
-{{- if ne .desktop "true" }}
+{{- if not .chezmoi.desktop }}
 run_once_bootstrap.sh
 {{- end }}
