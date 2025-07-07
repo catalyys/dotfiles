@@ -91,4 +91,4 @@
         opts: rw,sync,hard
         state: mounted
         fstype: nfs
-      loop: nfs_shares
+      loop: "{{ nfs_shares }}"

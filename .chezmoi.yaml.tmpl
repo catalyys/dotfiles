@@ -1,0 +1,9 @@
+diff:
+  exclude: 
+    - "scripts"
+data:
+{{- if contains (trim (include "/sys/class/dmi/id/product_name")) "Standard PC" }}
+  desktop: false
+{{- else }}
+  desktop: true
+{{ end }}

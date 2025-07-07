@@ -3,3 +3,7 @@ ansible/**
 
 other/
 other/**
+
+{{- if .desktop }}
+run_once_bootstrap.sh
+{{- end }}
