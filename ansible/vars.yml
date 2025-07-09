@@ -79,6 +79,7 @@ aur_packages:
   - kubecolor
   - grimblast-git
   - hyprland-autoname-workspaces-git
+  - zen-browser-bin
 
 enabled_services:
   - gdm

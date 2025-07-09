@@ -86,7 +86,7 @@
     - name: fstab
       become: true
       ansible.posix.mount:
-        src: "10.11.13.22:/mnt/user/{{ item }}"
+        src: "//10.11.13.22/mnt/user/{{ item }}"
         path: "/mnt/nfs/{{ item }}"
         opts: rw,sync,hard
         state: mounted
