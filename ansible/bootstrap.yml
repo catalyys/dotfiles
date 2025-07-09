@@ -44,7 +44,6 @@
 
         - name: Build and install yay
           command: makepkg -si --noconfirm
-          become: true
           args:
             chdir: "/tmp/yay"
           environment:
@@ -81,14 +80,25 @@
       file:
         path: "/mnt/nfs"
         state: directory
-        mode: "0644"
+        mode: "0777"
+
+    - name: create nfs dir
+      become: true
+      file:
+        path: "/mnt/nfs/{{ item }}"
+        state: directory
+        mode: "0777"
+        owner: 1000
+        group: 1000
+      loop: "{{ nfs_shares }}"
 
     - name: fstab
       become: true
       ansible.posix.mount:
-        src: "//10.11.13.22/mnt/user/{{ item }}"
+        src: "10.11.13.22:/mnt/user/{{ item }}"
         path: "/mnt/nfs/{{ item }}"
-        opts: rw,sync,hard
+        opts: defaults,user,noauto,relatime,rw
         state: mounted
         fstype: nfs
       loop: "{{ nfs_shares }}"
+      ignore_errors: yes

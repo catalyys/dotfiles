@@ -48,7 +48,6 @@ packages:
   - openssh
   - papirus-icon-theme
   - pavucontrol
-  - pfetch
   - polkit-gnome
   - python-openrazer
   - steam
@@ -73,11 +72,14 @@ packages:
   - libnewt
   - fprintd
   - moonlight-qt
+  - npm
+  - nfs-utils
 
 aur_packages:
   - wlogout
   - kubecolor
   - grimblast-git
+  - pfetch
   - hyprland-autoname-workspaces-git
   - zen-browser-bin
 
