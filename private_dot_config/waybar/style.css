@@ -7,7 +7,7 @@
     min-height: 11px;
 }
 
-@import "theme.css";
+@import "colors.css";
 
 /* Main Background */
 window#waybar {
@@ -16,7 +16,7 @@ window#waybar {
 
 /* Tooltip Styling */
 tooltip {
-    color: @foreground;
+    color: @primary;
     background: @background;
     border: solid;
     border-width: 1.5px;
@@ -24,21 +24,22 @@ tooltip {
     border-color: white;
 }
 
+/* Workspaces */
 #workspaces button.active {
     padding: 0px 2px;
-    color: @active-fg;
-    background: @active-bg;
+    color: @on_primary;
+    background: @on_primary_fixed_variant;
 }
 
 #workspaces button.urgent {
     padding: 0 2px;
     color: #be95ff;
 }
+
 #workspaces button {
     padding: 0 2px;
-    color: @foreground;
+    color: @primary;
 }
-
 
 /* General Module Styling */
 #custom-ws,
@@ -84,27 +85,13 @@ tooltip {
     font-size: 11.5pt;
     margin-bottom: -2px;
     padding-right: 3px;
-    text-shadow: 4px 0px 2px rgba(0, 0, 0, 1);
+    text-shadow: 1px 0px 0px rgba(0, 0, 0, 1);
 }
-
-/* Color Definitions */
-@define-color workspaces    #181825;
-@define-color cpuinfo       #181825;
-@define-color memory        #1e1e2e;
-@define-color cpu           #313244;
-@define-color arch          #b4befe;
-@define-color time          #313244;
-@define-color date          #1e1e2e;
-@define-color wifi          #181825;
-@define-color pulseaudio    #181825;
-@define-color backlight     #1e1e2e;
-@define-color battery       #313244;
-@define-color power         #b4befe;
 
 /* Window Icon */
 #custom-paddl {
     font-size: 11.5pt;
-    margin-bottom: -2px;
+    margin-bottom: -1px;
     margin-left: -3px;
     padding-right: 2px;
     background: @background;
@@ -116,72 +103,71 @@ tooltip {
 
 /* Workspaces */
 #custom-left1 {
-    color: @workspaces;
+    color: @primary_container;
     background: @background;
     padding-left: 2px;
 }
 
 #workspaces {
     padding: 0;
-    background: @workspaces;
+    background: @primary_container;
 }
 
 #custom-right1 {
-    color: @workspaces;
+    color: @primary_container;
     background: @background;
 }
 
-/* Temperature */
+/* CPU Info */
 #custom-paddc {
     padding-right: 3px;
 }
 
 #custom-left2 {
-    color: @cpuinfo;
+    color: @primary_container;
     background: @background;
-    border-radius: 10px;
     padding-left: 3px;
 }
 
 #custom-cpuinfo {
-    background: @cpuinfo;
+    background: @primary_container;
     padding-left: 1px;
     padding-right: 0px;
 }
 
 /* Memory */
 #custom-left3 {
-    color: @memory;
-    background: @cpuinfo;
+    color: @secondary_container;
+    background: @primary_container;
     padding-left: 3px;
 }
 
 #memory {
-    background: @memory;
+    background: @secondary_container;
     padding-left: 1px;
     padding-right: 0px;
 }
 
 /* CPU */
 #custom-left4 {
-    color: @cpu;
-    background: @memory;
+    color: @tertiary_container;
+    background: @secondary_container;
     padding-left: 3px;
 }
 
 #cpu {
-    background: @cpu;
+    background: @tertiary_container;
 }
 
 #custom-leftin1 {
-    color: @cpu;
-    font-size: 11.5pt;
+    color: @tertiary_container;
+    font-size: 16pt;
     margin-bottom: -2px;
 }
 
 /* Arch Logo */
 #custom-left5 {
-    color: @arch;
+    color: @tertiary_container;
     background: @background;
     text-shadow: -1px 0px 2px rgba(0, 0, 0, 0.6);
     padding-left: 3px;
@@ -189,8 +175,8 @@ tooltip {
 }
 
 #custom-arch {
-    color: black;
-    background: @arch;
+    color: @tertiary;
+    background: @tertiary_container;
     font-size: 13pt;
     margin-right: -3px;
     margin-bottom: -2px;
@@ -200,54 +186,43 @@ tooltip {
 }
 
 #custom-right2 {
-    color: @arch;
+    color: @tertiary_container;
     background: @background;
     font-size: 13pt;
 }
 
 /* Time */
 #custom-rightin1 {
-    color: @time;
-    font-size: 11.5pt;
+    color: @tertiary_container;
+    font-size: 16pt;
     margin-bottom: -2px;
 }
 
 #clock.time {
-    background: @time;
+    background: @tertiary_container;
 }
 
 #custom-right3 {
-    color: @time;
-    background: @date;
+    color: @tertiary_container;
+    background: @secondary_container;
 }
 
 /* Date */
 #clock.date {
-    background: @date;
+    background: @secondary_container;
 }
 
 #custom-right4 {
-    color: @date;
-    background: @wifi;
+    color: @secondary_container;
+    background: @background;
 }
 
 /* Network */
-#custom-wi {  
-    background: @wifi;
-    text-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
-    margin-right: -2px;
-    padding-left: 5px;
-}
-
 #custom-wifi {
-    background: @wifi;
+    background: @background;
+    color: @primary;
     padding-right: 0px;
     padding-left: 0px;
-}
-
-#custom-right5 {
-    color: @wifi;
-    background: @background;
 }
 
 /* Media Info */
@@ -259,52 +234,54 @@ tooltip {
 
 /* PulseAudio */
 #custom-left6 {
-    color: @pulseaudio;
+    color: @primary_container;
     background: @background;
     padding-left: 3px;
 }
 
 #pulseaudio {
-    background: @pulseaudio;
+    background: @primary_container;
+    color: @primary;
 }
 
 /* Brightness */
 #custom-left7 {
-    color: @backlight;
-    background: @pulseaudio;
+    color: @secondary_container;
+    background: @primary_container;
     padding-left: 2px;
 }
 
 #custom-updates,
 #backlight {
-    background: @backlight;
+    background: @secondary_container;
+    color: @secondary;
 }
 
 /* Battery */
 #custom-left8 {
-    color: @battery;
-    background: @backlight;
+    color: @tertiary_container;
+    background: @secondary_container;
     padding-left: 2px;
 }
 
-#custom-razer-bat,
-#battery {
-    background: @battery;
+#battery,
+#custom-razer-bat {
+    background: @tertiary_container;
     font-size: 8.5pt;
-    color: @foreground;
+    color: @tertiary;
 }
 
 /* Power Button */
 #custom-leftin2 {
-    color: @battery;
+    color: @tertiary_container;
     background: @background;
-    font-size: 11.5pt;
+    font-size: 16pt;
     margin-bottom: -2px;
 }
 
 #custom-power {
-    color: @background;
-    background: @power;
+    color: @primary;
+    background: @primary_container;
     text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.6);
     box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 1);
     border-radius: 20px;

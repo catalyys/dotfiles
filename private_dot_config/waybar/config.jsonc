@@ -8,75 +8,55 @@
     "gtk-layer-shell": true,
     "reload_style_on_change": true,
 
-// Positions
-	"modules-left": [
+    // Positions
+    "modules-left": [
         "custom/paddl",
-        "custom/ws",            // window icon
         "custom/left1",
-
-        "hyprland/workspaces",  // workspaces
+        "hyprland/workspaces",
         "custom/right1",
-
         "custom/paddw",
-        "hyprland/window"       // window title
+        "hyprland/window"
     ],
 
-	"modules-center": [
+    "modules-center": [
         "custom/paddc",
         "custom/left2",
-        "custom/cpuinfo",       // temperature
-        
+        "custom/cpuinfo",
         "custom/left3",
-        "memory",               // memory
-        
+        "memory",
         "custom/left4",
-        "cpu",                  // cpu
+        "cpu",
         "custom/leftin1",
-        
         "custom/left5",
-        "custom/arch",          // arch logo
+        "custom/arch",
         "custom/right2",
-        
         "custom/rightin1",
-        "clock#time",           // time
+        "clock#time",
         "custom/right3",
-
-        "clock#date",           // date
+        "clock#date",
         "custom/right4",
-
-        "tray",
-        "custom/right5"
+        "tray"
     ],
 
-	"modules-right": [
-        "custom/media",         // media info
-
+    "modules-right": [
+        "custom/media",
         "custom/left6",
-        "pulseaudio",           // output device
-
+        "pulseaudio",
         "custom/left7",
-        "backlight",            // brightness
-        "custom/updates",       // updates
-
+        "backlight",
+        "custom/updates",
         "custom/left8",
-        "battery",              // battery
-        "custom/razer-bat",     // mouse battery
-
+        "battery",
+        "custom/razer-bat",
         "custom/leftin2",
-        "custom/power"          // power button
+        "custom/power"
     ],
 
-// Modules
-    "custom/ws": {
-        "format": " ",
-        "tooltip": false
-    },
-
-	  "hyprland/workspaces": {
-		  "all-outputs": false,
-		  "on-click": "activate",
-		  //"active-only": false,
-		  "format": " {name} "
+    // Modules
+    "hyprland/workspaces": {
+        "all-outputs": false,
+        "on-click": "activate",
+        "format": " {name} "
     },
 
     "hyprland/window": {
@@ -100,8 +80,7 @@
             "(.*).jpg": "  $1.jpg",
             "(.*).png": "  $1.png",
             "(.*).svg": "  $1.svg",
-            "/": "  File Manager",
-            //"": "<span foreground='#cba6f7'></span>  Sejjy 󰅂 Hyprland"
+            "/": "  File Manager"
         },
         "min-length": 5,
         "max-length": 45
@@ -118,9 +97,9 @@
     },
 
     "memory": {
-        "states": {"c": 90},
-	    "format": "󰘚  {percentage}%",
-	    "format-c": "󰀪 {percentage}%",
+        "states": {"critical": 90},
+        "format": "󰘚  {percentage}%",
+        "format-critical": "󰀪 {percentage}%",
         "tooltip": true,
         "tooltip-format": "{used:0.1f} GB / {total:0.1f} GB",
         "interval": 20,
@@ -144,7 +123,6 @@
     "clock#time": {
         "format": "󱑂  {:%H:%M}",
         "timezone": "Europe/Berlin",
-        "timezones": "Europe/Berlin",
         "tooltip": true,
         "tooltip-format": "{:%I:%M %p}",
         "min-length": 8,
@@ -167,22 +145,17 @@
         "actions": {"on-click-right": "mode"},
         "min-length": 8,
         "max-length": 20
-	  },
+    },
 
-	  "tray": {
-		  "icon-size": 14,
-		  "spacing": 10
-	  },
-
-    "custom/wi": {  // TODO: Signal strength
-        "format": "󰤥 ",
-        "tooltip": false
+    "tray": {
+        "icon-size": 14,
+        "spacing": 10
     },
 
     "custom/wifi": {
         "exec": "~/.config/waybar/scripts/network-status.sh",
         "interval": 30,
-        "format": "Wi-Fi",   // use "{}" to display network name
+        "format": "Wi-Fi",
         "tooltip": true,
         "tooltip-format": "{}",
         "on-click": "~/.config/waybar/scripts/network-menu.sh",
@@ -232,35 +205,38 @@
         "format-charging": "󱘖 {capacity}%",
         "format-plugged": "󱘖 {capacity}%",
         "tooltip-format": "{timeTo}",
-	    "interval": 1,
+        "interval": 1,
         "min-length": 6,
         "max-length": 6
     },
 
-	  "custom/updates": {
-        "format": " 󰏗 {} ",
-        "interval": 300,                     // every two hours
-        "exec": "i=$(checkupdates-with-aur); echo \"$i\" |wc -l; echo \"$i\" |column -t |tr '\n' '\r'",       // # of updates and tooltip details
-        "exec-if": "exit 0",                  // always run; consider advanced run conditions
-        "on-click": "kitty -e sudo pacman -Syu", // update system
-        "signal": 8
+    "custom/updates": {
+        "format": "󰏗 {} ",
+        "interval": 300,
+        "exec": "yay -Qua | wc -l",
+        "exec-if": "exit 0",
+        "on-click": "kitty -e sudo pacman -Syu",
+        "signal": 8,
+        "tooltip": true,
+        "tooltip-format": "Click to update system"
     },
 
-    "custom/razer-bat":{
+    "custom/razer-bat": {
         "format": "<span foreground='#3FC5FF'>🖱️</span> {}",
-        "exec": "/home/olli/.config/waybar/scripts/razer-bat",
-        "interval": 100
+        "exec": "~/.config/waybar/scripts/razer-bat",
+        "interval": 100,
+        "tooltip": true,
+        "tooltip-format": "Razer Mouse Battery"
     },
 
     "custom/power": {
         "format": " ",
         "tooltip": false,
         "on-click": "wlogout",
-        //"on-click-right": "~/.config/waybar/scripts/logoutlaunch.sh 1",
-        "interval" : 86400
+        "interval": 86400
     },
 
-// Padding
+    // Padding
     "custom/paddl": {
         "format": " ",
         "tooltip": false
@@ -269,14 +245,12 @@
         "format": " ",
         "tooltip": false
     },
-
-    // Adjust this if you have a long network name so that the modules remain centered.
     "custom/paddc": {
         "format": "     ",
         "tooltip": false
     },
 
-// Left Arrows
+    // Left Arrows
     "custom/left1": {
         "format": "",
         "tooltip": false
@@ -310,7 +284,7 @@
         "tooltip": false
     },
 
-// Right Arrows
+    // Right Arrows
     "custom/right1": {
         "format": "",
         "tooltip": false
@@ -332,7 +306,7 @@
         "tooltip": false
     },
 
-// Left Inverse
+    // Left Inverse
     "custom/leftin1": {
         "format": "",
         "tooltip": false
@@ -342,7 +316,7 @@
         "tooltip": false
     },
 
-// Right Inverse
+    // Right Inverse
     "custom/rightin1": {
         "format": "",
         "tooltip": false
