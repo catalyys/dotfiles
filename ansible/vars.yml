@@ -74,6 +74,9 @@ packages:
   - moonlight-qt
   - npm
   - nfs-utils
+  - yazi
+  - rofi
+  - swaync
 
 aur_packages:
   - wlogout
@@ -82,6 +85,7 @@ aur_packages:
   - pfetch
   - hyprland-autoname-workspaces-git
   - zen-browser-bin
+  - clipse
 
 enabled_services:
   - gdm

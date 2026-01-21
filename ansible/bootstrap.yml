@@ -97,7 +97,7 @@
       ansible.posix.mount:
         src: "10.11.13.22:/mnt/user/{{ item }}"
         path: "/mnt/nfs/{{ item }}"
-        opts: defaults,user,noauto,relatime,rw
+        opts: defaults,user,relatime,rw
         state: mounted
         fstype: nfs
       loop: "{{ nfs_shares }}"
