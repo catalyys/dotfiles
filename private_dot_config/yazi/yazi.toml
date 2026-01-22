@@ -1,0 +1,20 @@
+[opener]
+play = [
+	{ run = "mpv %s", orphan = true, for = "unix" },
+]
+edit = [
+	{ run = "nvim %s", block = true, for = "unix" },
+	{ run = "helix %s", block = true, for = "unix" },
+]
+open = [
+	{ run = "xdg-open %s", desc = "Open" },
+]
+
+3d_print = [
+	{ run = "/home/olli/appimage/Bambu_Studio.AppImage %s", orphan = true, desc = "Bambu Studio" , for = "unix" },
+]
+
+[open]
+prepend_rules = [
+	{ url = "*.3mf", use = "3d_print" },
+]

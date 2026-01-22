@@ -9,3 +9,13 @@ other/**
 {{- if not (.desktop) }}
 run_once_bootstrap.sh
 {{- end }}
+
+{{- if eq .chezmoi.osRelease.id "debian" }}
+.themes
+Pictures
+.gtkrc-2.0
+.config/*
+!.config/nvim
+!.config/fish
+{{- end }}
+
