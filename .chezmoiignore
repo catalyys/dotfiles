@@ -14,6 +14,8 @@ run_once_bootstrap.sh
 .themes
 Pictures
 .gtkrc-2.0
+install_themes.sh
+once_bootstrap.sh
 .config/*
 !.config/nvim
 !.config/fish
