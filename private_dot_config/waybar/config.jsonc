@@ -21,7 +21,8 @@
     "modules-center": [
         "custom/paddc",
         "custom/left2",
-        "custom/cpuinfo",
+        "custom/tasks",
+        //"custom/cpuinfo",
         "custom/left3",
         "memory",
         "custom/left4",
@@ -47,7 +48,7 @@
         "custom/updates",
         "custom/left8",
         "battery",
-        "custom/razer-bat",
+        //"custom/razer-bat",
         "custom/leftin2",
         "custom/power"
     ],
@@ -64,7 +65,6 @@
         "separate-outputs": true,
         "rewrite": {
             "olli@Cthulhu:(.*)": "  $1",
-            "(.*)sejjy@archlinux:~": "  sejjy@archlinux",
             "(.*) — Mozilla Firefox": "<span foreground='#f38ba8'>󰈹</span>  $1",
             "(.*)Mozilla Firefox": "<span foreground='#f38ba8'>󰈹</span>  Firefox",
             "(.*) - Visual Studio Code": "<span foreground='#89b4fa'>󰨞</span>  $1",
@@ -84,6 +84,15 @@
         },
         "min-length": 5,
         "max-length": 45
+    },
+
+    "custom/tasks": {
+        "exec": "python3 ~/.config/waybar/scripts/waybar_tasks.py",
+        "return-type": "json",
+        "interval": 30,
+        "on-click": "xdg-open https://tasks.cl01.lqm.sh",
+        "format": "{}",
+        "tooltip": true
     },
 
     "custom/cpuinfo": {
