@@ -8,8 +8,7 @@
 --
 -- File: plugins/configs/lualine.lua
 -- Description: Pacman config for lualine
--- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
-
+ 
 local lualine = require("lualine")
 local utils = require("utils")
 

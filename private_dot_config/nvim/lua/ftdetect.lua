@@ -1,66 +1,54 @@
 -- detect ansible files
 
--- filetype configuration
+local function looks_like_ansible_by_content(filepath)
+  local ok, f = pcall(io.open, filepath, "r")
+  if not ok or not f then
+    return false
+  end
+  local i = 0
+  for line in f:lines() do
+    local l = line:lower()
+    if l:match("^%s*tasks%s*:") or l:match("^%s*roles%s*:") or l:match("^%s*handlers%s*:") then
+      f:close()
+      return true
+    end
+    i = i + 1
+    if i >= 50 then
+      break
+    end
+  end
+  f:close()
+  return false
+end
+
 vim.filetype.add({
   extension = {
-    yml = 'yaml.ansible',
-    yaml = 'yaml.ansible'
-  }
+    yml = 'yaml',
+    yaml = 'yaml',
+  },
+  -- pattern matches against the full path. Common Ansible dirs/files.
+  pattern = {
+    [".*/roles/.*%.ya?ml$"] = 'yaml.ansible',
+    [".*/tasks/.*%.ya?ml$"] = 'yaml.ansible',
+    [".*/handlers/.*%.ya?ml$"] = 'yaml.ansible',
+    [".*/playbooks/.*%.ya?ml$"] = 'yaml.ansible',
+    [".*playbook.*%.ya?ml$"] = 'yaml.ansible',
+    [".*site%.ya?ml$"] = 'yaml.ansible',
+  },
 })
 
--- Force filetype for all YAML files to be Ansible
--- This creates a dedicated group to ensure this rule is not overridden.
--- local ansible_ft_group = vim.api.nvim_create_augroup('AnsibleFiletype', { clear = true })
--- vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
---   group = ansible_ft_group,
---   pattern = { '*.yaml', '*.yml' },
---   command = 'set filetype=yaml.ansible',
--- })
+-- Fallback content-based detection for files that aren't in an obvious path
+vim.api.nvim_create_autocmd({"BufRead","BufNewFile"}, {
+  pattern = {"*.yml", "*.yaml"},
+  callback = function(args)
+    local fname = args.file
+    if not fname then
+      return
+    end
+    -- Only set to ansible if content looks like an Ansible playbook/role
+    if looks_like_ansible_by_content(fname) then
+      vim.bo.filetype = 'yaml.ansible'
+    end
+  end,
+})
 
--- if vim.filetype then
---   vim.filetype.add({
---     pattern = {
---       [".*/defaults/.*%.ya?ml"] = "yaml.ansible",
---       [".*/ansible/.*%.ya?ml"] = "yaml.ansible",
---       [".*/host_vars/.*%.ya?ml"] = "yaml.ansible",
---       [".*/group_vars/.*%.ya?ml"] = "yaml.ansible",
---       [".*/group_vars/.*/.*%.ya?ml"] = "yaml.ansible",
---       [".*/playbook.*%.ya?ml"] = "yaml.ansible",
---       [".*/playbooks/.*%.ya?ml"] = "yaml.ansible",
---       [".*/roles/.*/tasks/.*%.ya?ml"] = "yaml.ansible",
---       [".*/roles/.*/handlers/.*%.ya?ml"] = "yaml.ansible",
---       [".*/tasks/.*%.ya?ml"] = "yaml.ansible",
---       [".*/molecule/.*%.ya?ml"] = "yaml.ansible",
---     },
---   })
--- else
---   vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
---     pattern = {
---       "*/defaults/*.yml",
---       "*/defaults/*.yaml",
---       "*/ansible/*.yml",
---       "*/ansible/*.yaml",
---       "*/host_vars/*.yml",
---       "*/host_vars/*.yaml",
---       "*/group_vars/*.yml",
---       "*/group_vars/*.yaml",
---       "*/group_vars/*/*.yml",
---       "*/group_vars/*/*.yaml",
---       "*/playbook*.yml",
---       "*/playbook*.yaml",
---       "*/playbooks/*.yml",
---       "*/playbooks/*.yaml",
---       "*/roles/*/tasks/*.yml",
---       "*/roles/*/tasks/*.yaml",
---       "*/roles/*/handlers/*.yml",
---       "*/roles/*/handlers/*.yaml",
---       "*/tasks/*.yml",
---       "*/tasks/*.yaml",
---       "*/molecule/*.yml",
---       "*/molecule/*.yaml",
---     },
---     callback = function()
---       vim.bo.filetype = "yaml.ansible"
---     end,
---   })
--- end

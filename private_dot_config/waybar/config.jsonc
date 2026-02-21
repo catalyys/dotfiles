@@ -220,14 +220,13 @@
     },
 
     "custom/updates": {
-        "format": "󰏗 {} ",
+        "format": "󰏗 {}",
+        "return-type": "json",
         "interval": 300,
-        "exec": "yay -Qua | wc -l",
-        "exec-if": "exit 0",
-        "on-click": "kitty -e sudo pacman -Syu",
-        "signal": 8,
-        "tooltip": true,
-        "tooltip-format": "Click to update system"
+        "exec": "/home/olli/.config/waybar/scripts/updates-pacman-aur.sh",
+        "exec-if": "[ -x /home/olli/.config/waybar/scripts/updates-pacman-aur.sh ]",
+        "on-click": "kitty -e yay --no-confirm -Syu",
+        "tooltip": true
     },
 
     "custom/razer-bat": {

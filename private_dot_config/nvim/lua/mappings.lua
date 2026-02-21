@@ -8,8 +8,7 @@
 --
 -- File: mappings.lua
 -- Description: Key mapping configs
--- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
-
+ 
 -- <leader> is a space now
 local map = vim.keymap.set
 local cmd = vim.cmd

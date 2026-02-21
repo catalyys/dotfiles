@@ -8,7 +8,7 @@
 --
 -- File: plugins/configs/lspconfig.lua
 -- Description: LSP setup and config
--- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
+ 
 local merge_tables = require("utils").merge_tables
 
 local exist, custom = pcall(require, "custom")
@@ -21,9 +21,9 @@ local formatting_servers = {
   ruff_lsp = {},
   vimls = {},
   ansiblels = {},
-  terraformls = {},
-  pylsp = {},
-  -- yamlls = {},
+    terraformls = {},
+    pylsp = {},
+    yamlls = {},
   lua_ls = {
     settings = {
       Lua = {

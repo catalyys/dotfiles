@@ -8,8 +8,7 @@
 --
 -- File: autocmds.lua
 -- Description: Autocommand functions
--- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
--- Define autocommands with Lua APIs
+ 
 -- See: h:api-autocmd, h:augroup
 local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 

@@ -8,7 +8,7 @@
 --
 -- File: plugins/configs/mason.lua
 -- Description: mason
--- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
+ 
 return {
     require("mason").setup({
         PATH = "prepend",

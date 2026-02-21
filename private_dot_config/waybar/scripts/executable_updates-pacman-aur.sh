@@ -1,21 +1,36 @@
-#!/bin/sh
+#!/usr/bin/env bash
+# set -euo pipefail
 
-if ! updates_arch=$(checkupdates 2> /dev/null | wc -l ); then
-    updates_arch=0
+# get repo updates: prefer checkupdates (pacman-contrib), fallback to pacman -Qu
+repo_updates=0
+if command -v checkupdates >/dev/null 2>&1; then
+	repo_updates=$(checkupdates 2>/dev/null | wc -l)
+else
+	repo_updates=$(pacman -Qu 2>/dev/null | wc -l || echo 0)
 fi
 
-if ! updates_aur=$(checkupdates-aur 2> /dev/null | wc -l); then
-    updates_aur=0
+# get AUR updates via yay or paru if available
+aur_updates=0
+if command -v yay >/dev/null 2>&1; then
+	aur_updates=$(yay -Qua 2>/dev/null | wc -l || echo 0)
+elif command -v paru >/dev/null 2>&1; then
+	aur_updates=$(paru -Qua 2>/dev/null | wc -l || echo 0)
 fi
 
-if [ "$updates_arch" -gt 0 ] && [ "$updates_aur" -gt 0 ]; then
-    echo "$updates_arch(+$updates_aur)"
-elif [ "$updates_arch" -gt 0 ] && [ "$updates_aur" -le 0 ]; then
-    echo "$updates_arch"
-elif [ "$updates_arch" -le 0 ] && [ "$updates_aur" -gt 0 ]; then
-    echo "0(+$updates_aur)"
-elif [ "$updates_arch" -le 0 ] && [ "$updates_aur" -le 0 ]; then
-    echo "0"
+total=$((repo_updates + aur_updates))
+
+if [ "${total}" -eq 0 ]; then
+	fulltext="Up to date"
+else
+	fulltext="Updates: ${total} (repo:${repo_updates} aur:${aur_updates})"
 fi
+
+# Emit JSON with text (number) and tooltip (full message). Use python to JSON-escape safely.
+python3 - <<PY "$total" "$fulltext"
+import json, sys
+text = sys.argv[1]
+tooltip = sys.argv[2]
+print(json.dumps({"text": text, "tooltip": tooltip}))
+PY
 
 
