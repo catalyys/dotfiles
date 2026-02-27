@@ -27,6 +27,8 @@ function kns
 end
 
 alias ip="ip --color"
+alias can="cd ~/git/homelab/ansible/"
+alias ctf="cd ~/git/homelab/terraform/"
 
 function sue
     command sudoedit $argv

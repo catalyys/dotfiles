@@ -29,7 +29,7 @@ local builtin_plugins = {
   {
     "nvim-mini/mini.files",
     lazy = false,
-    opts = require("plugins.configs.mini-files"),
+    --opts = require("plugins.configs.mini-files"),
     config = function(_, opts)
       require("mini.files").setup(opts)
 

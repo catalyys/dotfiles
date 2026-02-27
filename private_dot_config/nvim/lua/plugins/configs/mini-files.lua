@@ -8,7 +8,7 @@
 --
 -- File: plugins/configs/mini-files.lua
 -- Description: mini-files config
- 
+
     windows = {
         preview = true,
     },

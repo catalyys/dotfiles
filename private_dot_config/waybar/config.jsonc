@@ -89,7 +89,7 @@
     "custom/tasks": {
         "exec": "python3 ~/.config/waybar/scripts/waybar_tasks.py",
         "return-type": "json",
-        "interval": 30,
+        "interval": 60,
         "on-click": "xdg-open https://tasks.cl01.lqm.sh",
         "format": "{}",
         "tooltip": true
@@ -100,7 +100,7 @@
         "return-type": "json",
         "format": "{}",
         "tooltip": true,
-        "interval": 5,
+        "interval": 30,
         "min-length": 8,
         "max-length": 12
     },
@@ -111,15 +111,15 @@
         "format-critical": "󰀪 {percentage}%",
         "tooltip": true,
         "tooltip-format": "{used:0.1f} GB / {total:0.1f} GB",
-        "interval": 20,
+        "interval": 30,
         "min-length": 7,
         "max-length": 7
     },
 
     "cpu": {
         "format": "󰻠  {usage}%",
-        "tooltip": false,
-        "interval": 5,
+        "tooltip": true,
+        "interval": 30,
         "min-length": 6,
         "max-length": 10
     },
@@ -214,7 +214,15 @@
         "format-charging": "󱘖 {capacity}%",
         "format-plugged": "󱘖 {capacity}%",
         "tooltip-format": "{timeTo}",
-        "interval": 1,
+        "states": {
+            "warning": 20,
+            "critical": 10
+        },
+        "events": {
+            "on-discharging-warning": "notify-send -u normal 'Low Battery'",
+            "on-discharging-critical": "notify-send -u critical 'Very Low Battery'"
+        },
+        "interval": 60,
         "min-length": 6,
         "max-length": 6
     },
@@ -241,7 +249,7 @@
         "format": " ",
         "tooltip": false,
         "on-click": "wlogout",
-        "interval": 86400
+        "interval": "once"
     },
 
     // Padding
