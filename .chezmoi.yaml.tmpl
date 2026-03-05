@@ -1,8 +1,8 @@
 diff:
-  exclude: 
+  exclude:
     - "scripts"
 data:
-{{- if contains (trim (include "/sys/class/dmi/id/product_name")) "Standard PC" }}
+{{- if and (stat "/sys/class/dmi/id/product_name") (contains (trim (include "/sys/class/dmi/id/product_name")) "Standard PC") }}
   desktop: true
 {{- else }}
   desktop: false
