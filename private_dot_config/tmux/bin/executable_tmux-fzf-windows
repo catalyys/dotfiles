@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+fzf_colors='bg:#1f1d2e,bg+:#26233a,fg:#e0def4,fg+:#faf4ed,hl:#eb6f92,hl+:#eb6f92,info:#908caa,marker:#ebbcba,pointer:#c4a7e7,prompt:#9ccfd8,spinner:#f6c177,header:#9ccfd8,border:#403d52'
+
+selection="$({
+  tmux list-windows -a -F '#{session_name}:#{window_index}	#{window_name}	#{pane_current_path}'
+} | fzf \
+  --ansi \
+  --height=100% \
+  --layout=reverse \
+  --border=rounded \
+  --prompt='windows  > ' \
+  --pointer='>' \
+  --marker='*' \
+  --header='enter: jump  ctrl-x: kill window' \
+  --delimiter='	' \
+  --with-nth=1,2,3 \
+  --preview='tmux list-panes -t {1} -F "#{pane_index} #{pane_current_command} #{pane_current_path}"' \
+  --preview-window='right,60%,border-left' \
+  --bind='ctrl-x:execute-silent(tmux kill-window -t {1})+reload(tmux list-windows -a -F "#{session_name}:#{window_index}\t#{window_name}\t#{pane_current_path}")' \
+  --color="$fzf_colors")"
+
+[ -n "$selection" ] || exit 0
+
+target="${selection%%$'\t'*}"
+session="${target%%:*}"
+
+tmux switch-client -t "$session"
+tmux select-window -t "$target"

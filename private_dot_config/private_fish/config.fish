@@ -26,6 +26,7 @@ function kns
     kubectl config set-context --current --namespace=$(k get namespaces | fzf --preview='kubectl get all -n {1}' | awk '{print $1}')
 end
 
+alias t="tmux"
 alias ip="ip --color"
 alias can="cd ~/git/homelab/ansible/"
 alias ctf="cd ~/git/homelab/terraform/"

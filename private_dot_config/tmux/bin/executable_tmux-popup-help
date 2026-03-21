@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+clear
+
+cat <<'EOF'
+tmux key guide
+===============
+
+core
+----
+prefix        Ctrl-a
+reload        prefix r
+menu          prefix M
+help          prefix ?
+
+panes
+-----
+split horiz   prefix v
+split vert    prefix s
+move          prefix h j k l
+move (quick)  Alt-h Alt-j Alt-k Alt-l
+resize        prefix H J K L
+zoom          prefix z
+kill pane     prefix x
+
+windows
+-------
+new window    prefix Enter / prefix c
+last window   prefix Tab
+tree          prefix w
+kill window   prefix X
+next layout   prefix Space
+
+popups
+------
+sessions      prefix S
+windows       prefix W
+scratch       prefix T
+
+copy mode
+---------
+enter         prefix [
+select        v
+copy          y or Enter
+paste buffer  prefix p
+paste wl      prefix P
+
+fzf popup tips
+--------------
+confirm       Enter
+delete item   Ctrl-x
+close         Esc or Ctrl-c
+
+Press any key to close.
+EOF
+
+IFS= read -r -n 1 _

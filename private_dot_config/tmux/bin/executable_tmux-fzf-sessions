@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+fzf_colors='bg:#1f1d2e,bg+:#26233a,fg:#e0def4,fg+:#faf4ed,hl:#eb6f92,hl+:#eb6f92,info:#908caa,marker:#ebbcba,pointer:#c4a7e7,prompt:#9ccfd8,spinner:#f6c177,header:#9ccfd8,border:#403d52'
+
+selection="$({
+  tmux list-sessions -F '#{session_name}	#{session_windows} windows	#{?session_attached,attached,detached}'
+} | fzf \
+  --ansi \
+  --height=100% \
+  --layout=reverse \
+  --border=rounded \
+  --prompt='sessions > ' \
+  --pointer='>' \
+  --marker='*' \
+  --header='enter: switch  ctrl-x: kill session' \
+  --delimiter='	' \
+  --preview='tmux list-windows -t {1}' \
+  --preview-window='right,60%,border-left' \
+  --bind='ctrl-x:execute-silent(tmux kill-session -t {1})+reload(tmux list-sessions -F "#{session_name}\t#{session_windows} windows\t#{?session_attached,attached,detached}")' \
+  --color="$fzf_colors")"
+
+[ -n "$selection" ] || exit 0
+
+target="${selection%%$'\t'*}"
+tmux switch-client -t "$target"
