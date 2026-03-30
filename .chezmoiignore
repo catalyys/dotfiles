@@ -19,5 +19,6 @@ once_bootstrap.sh
 .config/*
 !.config/nvim
 !.config/fish
+!.config/tmux
 {{- end }}
 
