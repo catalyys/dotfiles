@@ -52,6 +52,16 @@ DEFAULT = "{class}"
 [title_in_class."(?i)kitty"]
 "(?i)neomutt" = "neomutt"
 
+[title_in_class."(?i)zen"]
+"(?i)youtube" = ""
+"(?i)navidrome" = "♫"
+"(?i)twitch" = ""
+
+[title_in_class_active."(?i)zen"]
+"(?i)youtube" = ""
+"(?i)navidrome" = "♫"
+"(?i)twitch" = ""
+
 [title_in_class."(?i)firefox"]
 "(?i)youtube" = ""
 "(?i)holdem" = "🃁"

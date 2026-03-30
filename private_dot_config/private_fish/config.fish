@@ -27,6 +27,7 @@ function kns
 end
 
 alias t="tmux"
+alias ts="bash ~/.config/tmux/bin/tmux-fzf-sessions"
 alias ip="ip --color"
 alias can="cd ~/git/homelab/ansible/"
 alias ctf="cd ~/git/homelab/terraform/"
@@ -34,3 +35,13 @@ alias ctf="cd ~/git/homelab/terraform/"
 function sue
     command sudoedit $argv
 end
+
+
+if status is-interactive
+    if test -z "$TMUX"
+        if not set -q SSH_CONNECTION
+            exec tmux
+        end
+    end
+end
+
