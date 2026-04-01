@@ -16,8 +16,6 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
-vim.opt.completeopt = { 'menu', 'menuone', 'popup', 'fuzzy' }
-vim.opt.winborder = 'rounded'
 
 if vim.fn.has('nvim-0.12') == 0 then
 	vim.schedule(function()
@@ -28,6 +26,8 @@ if vim.fn.has('nvim-0.12') == 0 then
 	return
 end
 
+vim.opt.completeopt = { 'menu', 'menuone', 'popup', 'fuzzy' }
+vim.opt.winborder = 'rounded'
 
 local function is_ansible_file(path)
 	local normalized = path:gsub('\\', '/')
