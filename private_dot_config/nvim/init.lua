@@ -109,12 +109,19 @@ require('gitsigns').setup()
 require('remember')
 require('mini.pairs').setup()
 require('mini.pick').setup()
-require('which-key').setup()
 require('mason').setup()
+
+local wk = require("which-key")
+
+wk.add({
+        { "<leader>t", group = "Toggle" },
+        { "<leader>f", group = "Files" },
+})
+
 require('conform').setup({
         formatters_by_ft = {
                 lua = { 'stylua' },
-                python = { 'isort', 'black' },
+                python = { 'ruff_organize_imports', 'ruff_format' },
                 sh = { 'shfmt' },
                 bash = { 'shfmt' },
                 yaml = { 'yamlfmt', 'prettier', stop_after_first = true },
@@ -143,6 +150,11 @@ require('conform').setup({
         },
 })
 require('blink.cmp').setup({
+        -- keymap = {
+        --      preset = 'default',
+        --      ['<Up>'] = false,
+        --      ['<Down>'] = false,
+        -- },
         keymap = { preset = 'enter' },
         appearance = {
                 nerd_font_variant = 'mono',
@@ -175,26 +187,43 @@ vim.keymap.set('n', '<leader>fo', '<cmd>Oil<cr>', { desc = 'Open Files' })
 vim.keymap.set('n', '<leader><Space>', '<cmd>Pick buffers<cr>', { desc = 'Buffers' })
 vim.keymap.set('n', '<leader>fh', '<cmd>Pick help<cr>', { desc = 'Help tags' })
 vim.keymap.set('n', '<leader>cm', '<cmd>Mason<cr>', { desc = 'Mason' })
+vim.keymap.set("n", "<leader>tn", '<cmd>set relativenumber!<cr><cmd>set number!<cr>', { desc = "Toggle line number" })
+vim.keymap.set("n", "<leader>-", '<C-a>', { desc = "Increment number" })
+vim.keymap.set("n", "<leader>+", '<C-x>', { desc = "Decrement number" })
 
 local treesitter_ok, treesitter = pcall(require, 'nvim-treesitter.configs')
 if treesitter_ok then
         treesitter.setup({
-                ensure_installed = { 'bash', 'go', 'lua', 'markdown', 'python', 'vim', 'vimdoc', 'yaml' },
+                ensure_installed = { 'bash', 'lua', 'markdown', 'python', 'vim', 'vimdoc', 'yaml' },
                 highlight = { enable = true },
                 indent = { enable = true },
         })
 end
+
+local diagnostics_virtual_text_config = {
+        spacing = 2,
+        source = "if_many",
+}
+
+local virtual_text_enabled = false
 
 vim.diagnostic.config({
         severity_sort = true,
         float = { border = 'rounded' },
         underline = true,
         signs = true,
-        virtual_text = {
-                spacing = 2,
-                source = 'if_many',
-        },
+        virtual_text = false,
 })
+
+local function toggle_virtual_text()
+        virtual_text_enabled = not virtual_text_enabled
+
+        vim.diagnostic.config({
+                virtual_text = virtual_text_enabled and diagnostics_virtual_text_config or false,
+        })
+end
+
+vim.keymap.set("n", "<leader>td", toggle_virtual_text, { desc = "Toggle diagnostic virtual text" })
 
 local lsp_servers = {
         'ansiblels',
